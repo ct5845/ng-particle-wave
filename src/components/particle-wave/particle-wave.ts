@@ -1,10 +1,11 @@
-import {Component, ElementRef, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ElementRef, HostListener, Input} from '@angular/core';
 
 declare let THREE: any;
 
 @Component({
     selector: 'particle-wave',
-    templateUrl: 'particle-wave.html'
+    templateUrl: 'particle-wave.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ParticleWaveComponent {
     @Input() public amountX: number = 30;
@@ -13,6 +14,8 @@ export class ParticleWaveComponent {
     @Input() public far: number = 10000;
     @Input() public particleColor = 0xB8F6FF;
     @Input() public backgroundColor = 0xffffff;
+
+    @Input() public moveWithMouse = false;
 
     private separation = 100;
 
@@ -25,6 +28,9 @@ export class ParticleWaveComponent {
 
     private count = 0;
 
+    private posX;
+    private posY;
+
     private width: number;
     private height: number;
     private halfWidth: number;
@@ -34,18 +40,17 @@ export class ParticleWaveComponent {
     constructor(private element: ElementRef) {
     }
 
-    ngAfterViewInit() {
+    public ngAfterViewInit() {
         this.container = this.element.nativeElement;
 
         this.calculateMeasures();
 
         this.camera = new THREE.PerspectiveCamera(this.fov, this.aspectRatio, 1, this.far);
         this.camera.position.z = 1500;
-        this.camera.position.x = -15;
-        this.camera.position.y = 500;
+        this.camera.position.x = this.posX = -1 * this.halfWidth;
+        this.camera.position.y = this.posY = this.halfHeight;
 
         this.scene = new THREE.Scene();
-        this.camera.lookAt(this.scene.position);
 
         this.initParticles();
 
@@ -58,6 +63,18 @@ export class ParticleWaveComponent {
         this.animate();
 
         window.addEventListener('resize', this.onWindowResize.bind(this), false);
+
+        setTimeout(() => {
+            this.onWindowResize();
+        }, 1000);
+    }
+
+    @HostListener('mousemove', ['$event'])
+    public mouseMove($event) {
+        if (this.moveWithMouse) {
+            this.posY = $event.clientY - this.halfHeight;
+            this.posX = $event.clientX - this.halfWidth;
+        }
     }
 
     private calculateMeasures() {
@@ -101,6 +118,11 @@ export class ParticleWaveComponent {
     }
 
     private render() {
+        this.camera.position.x = this.posX;
+        this.camera.position.y = this.posY;
+        // console.log(this.camera.position);
+        this.camera.lookAt(this.scene.position);
+
         let i = 0;
 
         for (let ix = 0; ix < this.amountX; ix++) {

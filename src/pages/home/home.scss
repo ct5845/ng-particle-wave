@@ -1,3 +1,23 @@
 page-home {
+  particle-wave {
+    flex: 1 1 auto;
+  }
 
+  .my-content {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+    overflow: hidden;
+
+    h1 {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Zilla Slab Highlight', cursive;
+      font-size: 80px;
+      width: 100%;
+      padding: 0 1rem;
+    }
+  }
 }
