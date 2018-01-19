@@ -1,9 +1,12 @@
 {
   "name": "ion-particle-wave",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
-  "private": true,
+  "author": "ct5845",
+  "homepage": "https://github.com/ct5845/ion-particle-wave",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ct5845/ion-particle-wave.git"
+  },
   "scripts": {
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
@@ -34,5 +37,5 @@
     "@ionic/app-scripts": "3.1.8",
     "typescript": "2.4.2"
   },
-  "description": "An Ionic project"
+  "description": "An particle wave using ThreeJS built with Ionic"
 }
