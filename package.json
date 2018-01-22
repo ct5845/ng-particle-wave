@@ -1,6 +1,6 @@
 {
   "name": "ng-particle-wave",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "author": "ct5845",
   "homepage": "https://github.com/ct5845/ng-particle-wave",
   "repository": {
@@ -12,7 +12,8 @@
     "build": "ionic-app-scripts build",
     "lint": "ionic-app-scripts lint",
     "ionic:build": "ionic-app-scripts build",
-    "ionic:serve": "ionic-app-scripts serve"
+    "ionic:serve": "ionic-app-scripts serve",
+    "publish": "ng-packagr"
   },
   "dependencies": {
     "@angular/common": "5.0.3",
@@ -37,7 +38,18 @@
   "devDependencies": {
     "@ionic/app-scripts": "3.1.8",
     "@types/three": "^0.89.3",
+    "ng-packagr": "^1.6.0",
     "typescript": "2.4.2"
   },
-  "description": "An particle wave using ThreeJS built with Ionic"
+  "peerDependencies": {
+    "three": "^0.89.0",
+    "@types/three": "^0.89.3"
+  },
+  "description": "An particle wave using ThreeJS built with Ionic for demo",
+  "ngPackage": {
+    "$schema": "./node_modules/ng-packagr/package.schema.json",
+    "lib": {
+      "entryFile": "public_api.ts"
+    }
+  }
 }

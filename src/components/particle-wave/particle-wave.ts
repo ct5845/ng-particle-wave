@@ -1,10 +1,15 @@
 import {ChangeDetectionStrategy, Component, ElementRef, HostListener, Input} from '@angular/core';
-
-declare let THREE: any;
+import {PerspectiveCamera, Scene, Sprite} from 'three';
+import {CanvasRenderer} from '../../core/canvas-renderer/canvas-renderer';
+import {SpriteCanvasMaterial} from '../../core/canvas-renderer/sprite-canvas-material';
 
 @Component({
     selector: 'particle-wave',
-    templateUrl: 'particle-wave.html',
+    template: '',
+    styles: [`:host {
+            display: block;
+            overflow: hidden;
+        }` ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ParticleWaveComponent {
@@ -45,16 +50,16 @@ export class ParticleWaveComponent {
 
         this.calculateMeasures();
 
-        this.camera = new THREE.PerspectiveCamera(this.fov, this.aspectRatio, 1, this.far);
+        this.camera = new PerspectiveCamera(this.fov, this.aspectRatio, 1, this.far);
         this.camera.position.z = 1500;
         this.camera.position.x = this.posX = -1 * this.halfWidth;
         this.camera.position.y = this.posY = this.halfHeight;
 
-        this.scene = new THREE.Scene();
+        this.scene = new Scene();
 
         this.initParticles();
 
-        this.renderer = new THREE.CanvasRenderer();
+        this.renderer = new CanvasRenderer();
         this.renderer.setClearColor(this.backgroundColor, 1);
         this.renderer.setPixelRatio(window.devicePixelRatio);
         this.renderer.setSize(this.width, this.height);
@@ -69,7 +74,7 @@ export class ParticleWaveComponent {
         }, 1000);
     }
 
-    @HostListener('mousemove', ['$event'])
+    @HostListener('mousemove', [ '$event' ])
     public mouseMove($event) {
         if (this.moveWithMouse) {
             this.posY = $event.clientY - this.halfHeight;
@@ -90,7 +95,7 @@ export class ParticleWaveComponent {
         this.particles = [];
 
         let PI2 = Math.PI * 2;
-        let material = new THREE.SpriteCanvasMaterial({
+        let material = new SpriteCanvasMaterial({
             color: this.particleColor,
             program: function (context) {
                 context.beginPath();
@@ -103,7 +108,7 @@ export class ParticleWaveComponent {
 
         for (let ix = 0; ix < this.amountX; ix++) {
             for (let iy = 0; iy < this.amountY; iy++) {
-                let particle = this.particles[ i++ ] = new THREE.Sprite(material);
+                let particle = this.particles[ i++ ] = new Sprite(material);
                 particle.position.x = ix * this.separation - ((this.amountX * this.separation) / 2);
                 particle.position.z = iy * this.separation - ((this.amountX * this.separation) / 2);
                 this.scene.add(particle);
@@ -120,7 +125,6 @@ export class ParticleWaveComponent {
     private render() {
         this.camera.position.x = this.posX;
         this.camera.position.y = this.posY;
-        // console.log(this.camera.position);
         this.camera.lookAt(this.scene.position);
 
         let i = 0;

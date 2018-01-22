@@ -1,4 +1,4 @@
-import * as THREE from "three";
+import {Vector2} from 'three';
 
 export class RenderableSprite {
 
@@ -11,7 +11,7 @@ export class RenderableSprite {
     public z = 0;
 
     public rotation = 0;
-    public scale = new THREE.Vector2();
+    public scale = new Vector2();
 
     public material = null;
     public renderOrder = 0;

@@ -1,11 +1,10 @@
-import { NgModule } from '@angular/core';
-import { ParticleWaveComponent } from './particle-wave/particle-wave';
-import { ParticleWave2Component } from './particle-wave2/particle-wave2';
+import {NgModule} from '@angular/core';
+import {ParticleWaveModule} from './particle-wave/particle-wave.module';
+
 @NgModule({
-	declarations: [ParticleWaveComponent,
-    ParticleWave2Component],
-	imports: [],
-	exports: [ParticleWaveComponent,
-    ParticleWave2Component]
+    declarations: [],
+    imports: [ ParticleWaveModule ],
+    exports: [ ParticleWaveModule ]
 })
-export class ComponentsModule {}
+export class ComponentsModule {
+}
