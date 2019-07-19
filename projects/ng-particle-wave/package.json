@@ -1,0 +1,9 @@
+{
+  "name": "ng-particle-wave",
+  "version": "3.0.9",
+  "peerDependencies": {
+    "@angular/common": "^8.1.0",
+    "@angular/core": "^8.1.0",
+    "three": "^0.106.2"
+  }
+}

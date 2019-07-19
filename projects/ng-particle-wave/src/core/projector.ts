@@ -376,7 +376,7 @@ export class Projector {
 
                             this.renderList._line.material = object.material;
 
-                            if (object.material.vertexColors === VertexColors) {
+                            if (object.material['vertexColors'] === VertexColors) {
                                 this.renderList._line.vertexColors[0].copy(geometry.colors[v]);
                                 this.renderList._line.vertexColors[1].copy(geometry.colors[v - 1]);
 

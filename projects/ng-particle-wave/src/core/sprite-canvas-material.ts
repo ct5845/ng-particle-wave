@@ -1,6 +1,6 @@
-import {Color, Material} from "three";
+import {Color, SpriteMaterial} from 'three';
 
-export class SpriteCanvasMaterial extends Material {
+export class SpriteCanvasMaterial extends SpriteMaterial {
     public color;
     public program;
 

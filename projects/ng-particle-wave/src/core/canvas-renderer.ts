@@ -1,4 +1,4 @@
-import {Projector} from "../projector/projector";
+import {Projector} from "./projector";
 import {
     AdditiveBlending,
     Box2, Color, CompressedTexture, DataTexture, FaceColors, Matrix3, MirroredRepeatWrapping, MultiplyBlending,
@@ -8,9 +8,9 @@ import {
     UVMapping, Vector3,
     VertexColors
 } from "three";
-import {RenderableSprite} from "../projector/renderable-sprite";
-import {RenderableLine} from "../projector/renderable-line";
-import {RenderableFace} from "../projector/renderable-face";
+import {RenderableSprite} from "./renderable-sprite";
+import {RenderableLine} from "./renderable-line";
+import {RenderableFace} from "./renderable-face";
 
 export class CanvasRenderer {
     public domElement;

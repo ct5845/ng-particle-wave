@@ -1,24 +1,24 @@
-import {ChangeDetectionStrategy, Component, ElementRef, HostListener, Input} from '@angular/core';
-import {PerspectiveCamera, Scene, Sprite} from 'three';
-import {CanvasRenderer} from '../../core/canvas-renderer/canvas-renderer';
-import {SpriteCanvasMaterial} from '../../core/canvas-renderer/sprite-canvas-material';
+import {AfterViewInit, Component, ElementRef, HostListener, Input} from '@angular/core';
+import {Color, PerspectiveCamera, Scene, Sprite} from 'three';
+import {CanvasRenderer} from '../core/canvas-renderer';
+import {SpriteCanvasMaterial} from '../core/sprite-canvas-material';
 
 @Component({
-    selector: 'particle-wave',
-    template: '',
-    styles: [`:host {
-            display: block;
-            overflow: hidden;
-        }` ],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'ng-particle-wave',
+    template: ``,
+    styles: [ `:host {
+        display: block;
+        overflow: hidden;
+    }` ]
 })
-export class ParticleWaveComponent {
+export class NgParticleWaveComponent implements AfterViewInit {
     @Input() public amountX: number = 30;
     @Input() public amountY: number = 30;
     @Input() public fov: number = 75;
     @Input() public far: number = 10000;
-    @Input() public particleColor = 0xB8F6FF;
-    @Input() public backgroundColor = 0xFFFFFF;
+    @Input() public particleColor = '#B8F6FF';
+    @Input() public backgroundColor = new Color(255,255,255);
+    @Input() public backgroundColorAlpha = 1;
 
     @Input() public moveWithMouse = false;
 
@@ -60,7 +60,7 @@ export class ParticleWaveComponent {
         this.initParticles();
 
         this.renderer = new CanvasRenderer();
-        this.renderer.setClearColor(this.backgroundColor, 1);
+        this.renderer.setClearColor(this.backgroundColor, this.backgroundColorAlpha);
         this.renderer.setPixelRatio(window.devicePixelRatio);
         this.renderer.setSize(this.width, this.height);
         this.container.appendChild(this.renderer.domElement);
@@ -156,6 +156,5 @@ export class ParticleWaveComponent {
 
         this.renderer.setSize(this.width, this.height);
     }
+
 }
-
-
