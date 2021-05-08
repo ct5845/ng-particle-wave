@@ -38,7 +38,7 @@
   "devDependencies": {
     "@ionic/app-scripts": "3.1.8",
     "@types/three": "^0.89.3",
-    "ng-packagr": "^1.6.0",
+    "ng-packagr": "^10.1.1",
     "typescript": "2.4.2"
   },
   "peerDependencies": {
